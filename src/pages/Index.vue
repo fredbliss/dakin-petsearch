@@ -1,14 +1,36 @@
 <template>
-  <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
-  </q-page>
+  <div>
+    <PetList :pets="pets" />
+  </div>
 </template>
 
 <style>
 </style>
 
 <script>
+import Api from '../services/Api'
+import PetList from '../components/pet-list.vue'
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  data () {
+    return {
+      loading: true,
+      pets: []
+    }
+  },
+  components: {
+    'PetList': PetList
+  },
+  mounted () {
+    Api.getPets()
+      .then(pets => {
+        console.log(pets)
+        this.pets = pets
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        this.loading = false
+      })
+  }
 }
 </script>

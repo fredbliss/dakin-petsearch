@@ -18,6 +18,9 @@ module.exports = function (ctx) {
     ],
     supportIE: true,
     build: {
+      env: {
+        API: JSON.stringify('/petango_cache')
+      },
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // vueCompiler: true,
@@ -29,7 +32,7 @@ module.exports = function (ctx) {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /node_modules/
+          exclude: /(node_modules|quasar)/
         })
       }
     },
