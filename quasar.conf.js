@@ -1,5 +1,6 @@
-// Configuration for your app
+const envparser = require('./src/config/envparser')
 
+// Configuration for your app
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
@@ -18,9 +19,7 @@ module.exports = function (ctx) {
     ],
     supportIE: true,
     build: {
-      env: {
-        API: JSON.stringify('/petango_cache')
-      },
+      env: envparser(),
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // vueCompiler: true,

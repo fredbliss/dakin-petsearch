@@ -2933,6 +2933,11 @@ eslint@^4.18.2:
     table "4.0.2"
     text-table "~0.2.0"
 
+esm@3.0.84:
+  version "3.0.84"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.84.tgz#bb108989f4673b32d4f62406869c28eed3815a63"
+  integrity sha512-SzSGoZc17S7P+12R9cg21Bdb7eybX25RnIeRZ80xZs+VZ3kdQKzqTp2k4hZJjR7p9l0186TTXSgrxzlMDBktlw==
+
 espree@^3.5.2, espree@^3.5.4:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.4.tgz#b0f447187c8a8bed944b815a660bddf5deb5d1a7"
@@ -7353,6 +7358,13 @@ uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+
+v-img-fallback@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/v-img-fallback/-/v-img-fallback-0.1.4.tgz#263f619a80cdef84b4f189a87ac254c00c69689a"
+  integrity sha512-ejzIl07pXNHrflu2hO0uq0rGOtzqu3RzDudDg2Suwd8UgtDhBYDNmL7CszcMSrew8cmfPyju0Sc55yjPKfBpdA==
+  dependencies:
+    esm "3.0.84"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
