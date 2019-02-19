@@ -24,7 +24,6 @@ export default {
   mounted () {
     Api.getPets()
       .then(pets => {
-        console.log(pets)
         this.pets = pets
       })
       .catch(error => console.log(error))

@@ -12,5 +12,10 @@ export default {
     return Vue.axios.get(url + '/' + id + '.json').then((response) => {
       return response.data
     })
+  },
+  filterPetsByLocation (data) {
+    return Vue.axios.post('https://dakin.brightcloudstudioserver.com/files/petango/src/public/generate/filter', data).then((response) => {
+      return response.data
+    })
   }
 }

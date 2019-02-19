@@ -6,6 +6,7 @@
 </template>
 <script>
 import {EventBus} from '../services/event-bus.js'
+import Api from '../services/api.js'
 import PetResult from './pet-result.vue'
 import PetFilters from './pet-filters.vue'
 export default {
@@ -19,6 +20,11 @@ export default {
     'PetResult': PetResult,
     'PetFilters': PetFilters
   },
+  computed: {
+    setInitialPets () {
+      return {...this.pets}
+    }
+  },
   data () {
     return {
       filters: {
@@ -29,28 +35,58 @@ export default {
     }
   },
   methods: {
-    updateList (payload) {
-      let self = this
-      self.filters = payload
-      return this.pets
-        .filter(function (pet) {
-          if ((self.filters.selectedAnimalType && pet.Species === self.filters.selectedAnimalType)) {
-            return pet
-          }
+    filterByLocation (payload) {
+      let animalTypeLabel = ''
+      let genderLabel = ''
+      let locationLabel = ''
 
-          if ((self.selectedAnimalGender && pet.Sex === self.selectedAnimalGender)) {
-            return pet
-          }
+      switch (payload.selectedAnimalType) {
+        case '1':
+          animalTypeLabel = 'Dog'
+          break
+        case '2':
+          animalTypeLabel = 'Cat'
+          break
+        default:
+          animalTypeLabel = 'All Species'
+      }
 
-          if ((self.selectedLocation && pet.Location === self.selectedLocation)) {
-            return pet
-          }
-        })
+      switch (payload.selectedGender) {
+        case 'M':
+          genderLabel = 'Male'
+          break
+        case 'F':
+          genderLabel = 'Female'
+          break
+        default:
+          genderLabel = 'Both'
+      }
+
+      switch (payload.selectedLocation) {
+        case '728':
+          locationLabel = 'Springfield'
+          break
+        case '56':
+          locationLabel = 'Leverett'
+          break
+        default:
+          locationLabel = 'All'
+      }
+
+      return Api.filterPetsByLocation({
+        'action': 'filter',
+        'site': { 'value': payload.selectedLocation, 'label': locationLabel },
+        'speciesID': { 'value': payload.selectedAnimalType, 'label': animalTypeLabel },
+        'sex': { 'value': payload.selectedGender, 'label': genderLabel }
+      })
     }
   },
   mounted () {
-    EventBus.$on('filter-change', (payload) => {
-      this.updateList(payload)
+    EventBus.$on('filter-change-location', (payload) => {
+      this.filterByLocation(payload)
+        .then((pets) => {
+          this.pets = pets
+        })
     })
   }
 }
